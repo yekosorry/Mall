@@ -14,4 +14,10 @@
 
 # download fastdfs
 
+
+#comit pull merger pupsh
 # why can't push ohter project
+#comit pull merger pspsh、
+
+
+# push1
