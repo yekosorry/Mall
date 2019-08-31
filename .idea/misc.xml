@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/mall-api/pom.xml" />
+        <option value="$PROJECT_DIR$/web-util/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-user/pom.xml" />
+        <option value="$PROJECT_DIR$/common-util/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/service-util/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-user-web/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-manager-web/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/fastdfs-client-java/target/maven-archiver/pom.properties" />
+        <option value="$PROJECT_DIR$/fastdfs-client-java/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-manager-service/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+          <State>
+            <id>Class structureJava</id>
+          </State>
+          <State>
+            <id>Code maturityJava</id>
+          </State>
+          <State>
+            <id>Google Web Toolkit</id>
+          </State>
+          <State>
+            <id>JUnitJava</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Java 5Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>Java 7Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>Java 8Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>JavadocJava</id>
+          </State>
+          <State>
+            <id>Numeric issuesJava</id>
+          </State>
+          <State>
+            <id>PerformanceJava</id>
+          </State>
+          <State>
+            <id>Spring</id>
+          </State>
+          <State>
+            <id>Spring AOPSpring</id>
+          </State>
+          <State>
+            <id>TestNGJava</id>
+          </State>
+          <State>
+            <id>Threading issuesJava</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

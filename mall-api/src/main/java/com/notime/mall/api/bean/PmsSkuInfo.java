@@ -46,6 +46,7 @@ public class PmsSkuInfo implements Serializable {
 
     public void setSpuId(String spuId) {
         this.spuId = spuId;
+        this.productId=spuId;
     }
 
     public String getId() {
@@ -110,6 +111,7 @@ public class PmsSkuInfo implements Serializable {
 
     public void setProductId(String productId) {
         this.productId = productId;
+        this.spuId = productId;
     }
 
     public List<PmsSkuImage> getSkuImageList() {

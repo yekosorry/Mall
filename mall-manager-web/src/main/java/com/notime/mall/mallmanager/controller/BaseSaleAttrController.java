@@ -30,8 +30,8 @@ public class BaseSaleAttrController {
     @RequestMapping("baseSaleAttrList")
     @CrossOrigin
     public List<PmsBaseSaleAttr>  getBaseSaleAttrList(){
-        List<PmsBaseSaleAttr> PmsBaseSaleAttr =pmsBaseSaleAttrServier.getBaseSaleAttrList();
-        return  PmsBaseSaleAttr;
+        List<PmsBaseSaleAttr> pmsBaseSaleAttr =pmsBaseSaleAttrServier.getBaseSaleAttrList();
+        return  pmsBaseSaleAttr;
     }
 
 }

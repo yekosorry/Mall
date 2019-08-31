@@ -13,6 +13,7 @@ package com.notime.mall.mallmanager.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.notime.mall.api.bean.PmsSkuInfo;
 import com.notime.mall.api.service.PmsSkuInfoService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,9 +25,15 @@ public class SkuController {
 
     @Reference
     PmsSkuInfoService pmsSkuInfoService;
+    @CrossOrigin
     @RequestMapping("saveSkuInfo")
     public String  saveSkuInfo(@RequestBody PmsSkuInfo pmsSkuInfo){
         pmsSkuInfoService.saveSkuInfo(pmsSkuInfo);
         return "success";
     }
+
+
+    //Request URL: http://127.0.0.1:8081/saveSkuInfo
+
+    
 }

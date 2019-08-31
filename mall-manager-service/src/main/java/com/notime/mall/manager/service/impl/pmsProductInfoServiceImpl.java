@@ -11,10 +11,12 @@
 package com.notime.mall.manager.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.notime.mall.api.bean.PmsProductImage;
 import com.notime.mall.api.bean.PmsProductInfo;
 import com.notime.mall.api.bean.PmsProductSaleAttr;
 import com.notime.mall.api.bean.PmsProductSaleAttrValue;
 import com.notime.mall.api.service.PmsProductInfoService;
+import com.notime.mall.manager.mapper.PmsProductImageMapper;
 import com.notime.mall.manager.mapper.PmsProductInfoMapper;
 import com.notime.mall.manager.mapper.PmsProductSaleAttrMapper;
 import com.notime.mall.manager.mapper.PmsProductSaleAttrValueMapper;
@@ -27,16 +29,44 @@ public class pmsProductInfoServiceImpl implements PmsProductInfoService {
 
     @Autowired
     PmsProductInfoMapper pmsProductInfoMapper;
+
+    @Autowired
+    PmsProductSaleAttrMapper pmsProductSaleAttrMapper;
+
+    @Autowired
+    PmsProductImageMapper pmsProductImageMapper;
     @Override
     public List<PmsProductInfo> getSpuListBycatalog3Id(String catalog3Id) {
         PmsProductInfo pmsProductInfo = new PmsProductInfo();
         pmsProductInfo.setCatalog3Id(catalog3Id);
         List<PmsProductInfo> pmsProductInfoList = pmsProductInfoMapper.select(pmsProductInfo);
+
+        for (PmsProductInfo productInfo : pmsProductInfoList) {
+            PmsProductSaleAttr pmsProductSaleAttr = new PmsProductSaleAttr();
+            String id = productInfo.getId();
+            pmsProductSaleAttr.setProductId(id);
+            List<PmsProductSaleAttr> pmsProductSaleAttrList = pmsProductSaleAttrMapper.select(pmsProductSaleAttr);
+            productInfo.setSpuSaleAttrList(pmsProductSaleAttrList);
+
+
+            PmsProductImage pmsProductImage = new PmsProductImage();
+            pmsProductImage.setProductId(id);
+            List<PmsProductImage> pmsProductImageList = pmsProductImageMapper.select(pmsProductImage);
+            productInfo.setSpuImageList(pmsProductImageList);
+        }
         return pmsProductInfoList;
+        /*
+          @Transient
+    private List<PmsProductSaleAttr> spuSaleAttrList;
+
+
+
+    @Transient
+    private List<PmsProductImage> spuImageList;
+         */
+
     }
 
-    @Autowired
-    PmsProductSaleAttrMapper pmsProductSaleAttrMapper;
 
     @Autowired
     PmsProductSaleAttrValueMapper pmsProductSaleAttrValueMapper;
@@ -72,6 +102,32 @@ public class pmsProductInfoServiceImpl implements PmsProductInfoService {
                 pmsProductSaleAttrValueMapper.insertSelective(pmsProductSaleAttrValue);
             }
 
+        }
+
+        // 保存图片
+           // product 就是 PmsProductInfo的id
+        PmsProductImage pmsProductImage = new PmsProductImage();
+        pmsProductImage.setProductId(id);
+        List<PmsProductImage> spuImageList = pmsProductInfo.getSpuImageList();
+        for (PmsProductImage productImage : spuImageList) {
+
+            /*
+              @Column
+    @Id
+    private String id;
+    @Column
+    private String productId;
+    @Column
+    private String imgName;
+    @Column
+    private String imgUrl;
+
+            四个属性都是数据库存在的字段 不能直接获取吗 还要设Productid
+
+            // 这个需要分析前端代码吧
+             */
+            productImage.setProductId(id);
+            pmsProductImageMapper.insertSelective(productImage);
         }
     }
 }

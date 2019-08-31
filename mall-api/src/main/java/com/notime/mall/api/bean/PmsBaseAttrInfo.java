@@ -28,6 +28,7 @@ public class PmsBaseAttrInfo implements Serializable {
     // 页面传来的 attrId  没有这个属性添加一个
     // 没有set get 给它
     // 对应的是id
+
     @Transient
     private String attrId;
 

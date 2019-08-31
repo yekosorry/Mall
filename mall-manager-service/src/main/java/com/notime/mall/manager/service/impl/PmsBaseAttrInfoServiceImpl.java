@@ -26,17 +26,30 @@ public class PmsBaseAttrInfoServiceImpl implements PmsBaseAttrInfoService {
     @Autowired
     PmsBaseAttrInfoMapper pmsBaseAttrInfoMapper;
 
+
+    @Autowired
+    PmsBaseAttrValueMapper pmsBaseAttrValueMapper;
     @Override
 
     public List<PmsBaseAttrInfo> getAttrInfoList(String catalog3Id) {
         PmsBaseAttrInfo pmsBaseAttrInfo = new PmsBaseAttrInfo();
         pmsBaseAttrInfo.setCatalog3Id(catalog3Id);
         List<PmsBaseAttrInfo> pmsBaseAttrInfoList = pmsBaseAttrInfoMapper.select(pmsBaseAttrInfo);
+
+        //    @Transient
+        //    List<PmsBaseAttrValue> attrValueList;
+        for (PmsBaseAttrInfo baseAttrInfo : pmsBaseAttrInfoList) {
+            PmsBaseAttrValue pmsBaseAttrValue = new PmsBaseAttrValue();
+            String id = baseAttrInfo.getId();
+            pmsBaseAttrValue.setAttrId(id);
+            List<PmsBaseAttrValue> select = pmsBaseAttrValueMapper.select(pmsBaseAttrValue);
+            baseAttrInfo.setAttrValueList(select);
+        }
+
+
         return pmsBaseAttrInfoList;
     }
 
-    @Autowired
-    PmsBaseAttrValueMapper pmsBaseAttrValueMapper;
     @Override
     public void saveAttrInfo(PmsBaseAttrInfo pmsBaseAttrInfo) {
         // 保存与新增都是同一个方法名 需要判断
@@ -49,10 +62,13 @@ public class PmsBaseAttrInfoServiceImpl implements PmsBaseAttrInfoService {
             // 保存后面的数据 需要 pms-base-attr -value
             List<PmsBaseAttrValue> baseAttrInfoAttrValueList = pmsBaseAttrInfo.getAttrValueList();
             for (PmsBaseAttrValue pmsBaseAttrValue : baseAttrInfoAttrValueList) {
+                pmsBaseAttrValue.setAttrId(id);
                 pmsBaseAttrValueMapper.insertSelective(pmsBaseAttrValue);
             }
         }
+
         pmsBaseAttrInfoMapper.updateByPrimaryKeySelective(pmsBaseAttrInfo);
+
         List<PmsBaseAttrValue> baseAttrInfoAttrValueList = pmsBaseAttrInfo.getAttrValueList();
 
         //  pmsBaseAttrValueMapper.updateByPrimaryKeySelective(pmsBaseAttrValue);  一直存在 update没有用
@@ -67,6 +83,7 @@ public class PmsBaseAttrInfoServiceImpl implements PmsBaseAttrInfoService {
 
         }
         for (PmsBaseAttrValue pmsBaseAttrValue : baseAttrInfoAttrValueList) {
+            pmsBaseAttrValue.setAttrId(id);
             pmsBaseAttrValueMapper.insertSelective(pmsBaseAttrValue);
         }
 

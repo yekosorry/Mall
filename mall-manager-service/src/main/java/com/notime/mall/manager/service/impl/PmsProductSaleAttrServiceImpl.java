@@ -17,7 +17,6 @@ import com.notime.mall.api.service.PmsProductSaleAttrService;
 import com.notime.mall.manager.mapper.PmsProductSaleAttrMapper;
 import com.notime.mall.manager.mapper.PmsProductSaleAttrValueMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -35,12 +34,16 @@ public class PmsProductSaleAttrServiceImpl implements PmsProductSaleAttrService 
 
       //  return pmsProductSaleAttrMapper.getspuSaleAttrListByspuId(spuId);  数据格式老是对不上 传多了不可以不要吗
         // sql 语句写错了 pmsProductSaleAttrValue  要求 setProductId setSaleAttrId  都要与pmsProductSaleAttr 相等
-        Example example = new Example(PmsProductSaleAttr.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("productId",spuId);
-        List<PmsProductSaleAttr> attrsList = pmsProductSaleAttrMapper.selectByExample(example);
+//        Example example = new Example(PmsProductSaleAttr.class);
+//        Example.Criteria criteria = example.createCriteria();
+//        criteria.andEqualTo("productId",spuId);
+//        List<PmsProductSaleAttr> attrsList = pmsProductSaleAttrMapper.selectByExample(example);
+
+        PmsProductSaleAttr pmsProductSaleAttr1 = new PmsProductSaleAttr();
+        pmsProductSaleAttr1.setProductId(spuId);
+        List<PmsProductSaleAttr> pmsProductSaleAttrList = pmsProductSaleAttrMapper.select(pmsProductSaleAttr1);
         PmsProductSaleAttrValue pmsProductSaleAttrValue = new PmsProductSaleAttrValue();
-        for (PmsProductSaleAttr pmsProductSaleAttr : attrsList) {
+        for (PmsProductSaleAttr pmsProductSaleAttr : pmsProductSaleAttrList) {
 
             pmsProductSaleAttrValue.setProductId(spuId);
             pmsProductSaleAttrValue.setSaleAttrId(pmsProductSaleAttr.getSaleAttrId());
@@ -48,8 +51,8 @@ public class PmsProductSaleAttrServiceImpl implements PmsProductSaleAttrService 
             pmsProductSaleAttr.setSpuSaleAttrValueList(pmsProductSaleAttrValueList);
 
         }
-     // return attrsList;
-        List<PmsProductSaleAttr> pmsProductSaleAttrList = pmsProductSaleAttrMapper.getspuSaleAttrListByspuId(spuId);
-        return pmsProductSaleAttrList;
+      return pmsProductSaleAttrList;
+        //List<PmsProductSaleAttr> pmsProductSaleAttrList = pmsProductSaleAttrMapper.getspuSaleAttrListByspuId(spuId);
+        //return pmsProductSaleAttrList;
     }
 }
