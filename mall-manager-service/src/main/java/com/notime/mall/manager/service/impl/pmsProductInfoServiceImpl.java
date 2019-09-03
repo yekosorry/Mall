@@ -11,15 +11,9 @@
 package com.notime.mall.manager.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.notime.mall.api.bean.PmsProductImage;
-import com.notime.mall.api.bean.PmsProductInfo;
-import com.notime.mall.api.bean.PmsProductSaleAttr;
-import com.notime.mall.api.bean.PmsProductSaleAttrValue;
+import com.notime.mall.api.bean.*;
 import com.notime.mall.api.service.PmsProductInfoService;
-import com.notime.mall.manager.mapper.PmsProductImageMapper;
-import com.notime.mall.manager.mapper.PmsProductInfoMapper;
-import com.notime.mall.manager.mapper.PmsProductSaleAttrMapper;
-import com.notime.mall.manager.mapper.PmsProductSaleAttrValueMapper;
+import com.notime.mall.manager.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -129,5 +123,12 @@ public class pmsProductInfoServiceImpl implements PmsProductInfoService {
             productImage.setProductId(id);
             pmsProductImageMapper.insertSelective(productImage);
         }
+    }
+
+    @Override
+    public List<PmsProductSaleAttr> getSpuSaleAttrListByProductId(String productId, String skuId) {
+
+       return   pmsProductSaleAttrMapper.getSpuSaleAttrListByProductId(productId,skuId);
+
     }
 }

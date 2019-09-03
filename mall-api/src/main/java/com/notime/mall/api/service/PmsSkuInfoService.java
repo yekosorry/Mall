@@ -12,6 +12,12 @@ package com.notime.mall.api.service;
 
 import com.notime.mall.api.bean.PmsSkuInfo;
 
+import java.util.List;
+
 public interface PmsSkuInfoService {
     void saveSkuInfo(PmsSkuInfo pmsSkuInfo);
+
+    PmsSkuInfo getSkuInfoBySkuId(String skuId) throws InterruptedException;
+
+    List<PmsSkuInfo> getSkuInfoByProductId(String productId);
 }

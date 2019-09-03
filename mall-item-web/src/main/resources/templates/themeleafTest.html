@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<br>
+取值：<input type="text" th:value="${hello}"/> <br/>
+判断：<input type="text"  th:value="${hello}" th:if="${flag}"/><br>
+循环：<input type="text" th:value="${obj}" th:each="obj:${list}" /> <br>
+函数调用：
+<a th:href="'javascript:show(\' '+${hello}+' \');' ">调用函数</a>
+
+
+三元表达式：<input type="text" th:value="(${num=='1'})?'打我啊':'笨蛋'"/> <br/>
+对象取值 <input type="text" th:value="${umsMember?.username}"/>
+</body>
+<script language="JavaScript">
+
+    function show(a) {
+        alert("函数调用"+a);
+    }
+</script>
+
+页面引入： <div th:include="includeTestr::part"></div>
+</html>

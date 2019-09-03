@@ -25,7 +25,8 @@
         <dubbo.version>2.6.7</dubbo.version>
         <zkclient.version>0.11</zkclient.version>
         <mybatis.version>2.1.0</mybatis.version>
-        <nekohtml.version>1.9.2</nekohtml.version>
+        <nekohtml.version>1.9.22</nekohtml.version>
+
         <xml-apis.version>2.0.2</xml-apis.version>
         <batik-ext.version>1.11</batik-ext.version>
         <jsoup.version>1.12.1</jsoup.version>
@@ -36,10 +37,18 @@
         <jest.version>6.3.1</jest.version>
         <jna.version>5.4.0</jna.version>
         <beanUtils.version>1.8.3</beanUtils.version>
+        <redisson.version>3.11.3</redisson.version>
     </properties>
 
     <dependencyManagement>
+        <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
+
         <dependencies>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
@@ -70,12 +79,12 @@
                 <version>${mybatis.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>net.sourceforge.nekohtml</groupId>
                 <artifactId>nekohtml</artifactId>
                 <version>${nekohtml.version}</version>
             </dependency>
+
 
             <dependency>
                 <groupId>xml-apis</groupId>

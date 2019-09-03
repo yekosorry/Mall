@@ -11,6 +11,7 @@
 package com.notime.mall.api.service;
 
 import com.notime.mall.api.bean.PmsProductInfo;
+import com.notime.mall.api.bean.PmsProductSaleAttr;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface PmsProductInfoService {
     List<PmsProductInfo> getSpuListBycatalog3Id(String catalog3Id);
 
     void saveSpuInfo(PmsProductInfo pmsProductInfo);
+
+    List<PmsProductSaleAttr> getSpuSaleAttrListByProductId(String productId, String skuId);
 }

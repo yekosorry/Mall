@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.notime.mall.manager.mapper.PmsSkuSaleAttrValueMapper">
+    <resultMap id="getSkuSaleAttrValueListBySpuResult" type="com.notime.mall.api.bean.PmsSkuSaleAttrValue" autoMapping="true">
+
+        <result property="id" column="id" ></result>
+
+
+    </resultMap>
+
+
+  <select id="getSkuSaleAttrValueListBySpu"  resultMap="getSkuSaleAttrValueListBySpuResult">
+      select
+sav.id,
+sav.sale_attr_id,
+sav.sale_attr_name,
+sav.sale_attr_value_id,
+sav.sale_attr_value_name
+FROM pms_sku_info
+join pms_sku_sale_attr_value sav
+on pms_sku_info.id = sav.sku_id
+where product_id = #{productId}
+  </select>
+
+</mapper>

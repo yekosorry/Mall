@@ -37,4 +37,51 @@ join pms_product_sale_attr_value value
 on attr.product_id = value.product_id  and attr.sale_attr_id =value.sale_attr_id
 where attr.product_id = #{spuId}
     </select>
+
+
+    <resultMap id="getSpuSaleAttrListByProductIdResultMap" type="com.notime.mall.api.bean.PmsProductSaleAttr">
+        <id column="attr_id" property="id" />
+
+        <result column="attr_productId" property="productId" />
+        <result column="attr_saleAttrId" property="saleAttrId" />
+        <result column="attr_saleAttrName" property="saleAttrName" />
+
+        <collection property="spuSaleAttrValueList"  ofType="com.notime.mall.api.bean.PmsProductSaleAttrValue">
+            <id column="value_id" property="id" />
+
+            <result column="value_productId" property="productId" />
+            <result column="value_saleAttrId" property="saleAttrId" />
+            <result column="value_saleAttrValueName" property="saleAttrValueName" />
+            <result column="is_checked" property="isChecked" />
+        </collection>
+    </resultMap>
+
+    <select id ="getSpuSaleAttrListByProductId" resultMap="getSpuSaleAttrListByProductIdResultMap" >
+SELECT
+attr.id attr_id,
+attr.product_id attr_productId,
+attr.sale_attr_id   attr_saleAttrId,
+attr.sale_attr_name  attr_saleAttrName,
+value.id value_id,
+value.product_id value_productId,
+value.sale_attr_id  value_saleAttrId,
+value.sale_attr_value_name   value_saleAttrValueName,
+
+	pms_sku_sale_attr_value.sku_id,
+IF
+	( pms_sku_sale_attr_value.sku_id IS NOT NULL, 1, 0 ) AS is_checked
+FROM
+	pms_product_sale_attr_value value
+	JOIN pms_product_sale_attr  attr
+	ON attr.product_id = value.product_id
+	AND attr.sale_attr_id = value.sale_attr_id
+	LEFT JOIN pms_sku_sale_attr_value
+	ON pms_sku_sale_attr_value.sale_attr_id = value.sale_attr_id
+	AND pms_sku_sale_attr_value.sale_attr_value_id = value.id
+	AND pms_sku_sale_attr_value.sku_id = #{skuId}
+WHERE
+	attr.product_id = #{productId}
+
+
+    </select>
 </mapper>
