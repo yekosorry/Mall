@@ -124,7 +124,7 @@ public class ItemController {
             for (PmsSkuSaleAttrValue pmsSkuSaleAttrValue : skuSaleAttrValueList) {
 
                 String saleAttrValueId = pmsSkuSaleAttrValue.getSaleAttrValueId();
-                    key=key+"|"+ saleAttrValueId;
+                key=key+"|"+ saleAttrValueId;
             }
 
             valuesSkuinfo.put(key,skuInfo.getId());
@@ -157,8 +157,14 @@ spring.thymeleaf.mode=LEGACYHTML5  这个什么意思
       方法参数显示cp
      显示方法所在位置cq
      前往方法所在位置cu
-    */
+      ctrl 左右  在单词左右
 
+//
+
+
+
+
+*/
 
 
 }
