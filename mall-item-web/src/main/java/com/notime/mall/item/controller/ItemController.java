@@ -67,6 +67,7 @@ public class ItemController {
     @Reference
     PmsSkuSaleAttrValueService pmsSkuSaleAttrValueService;
    // 根据skuid  跳转页面详情
+    // skuId 自动提示不是驼峰命名可还行
     @RequestMapping("/{skuId}.html")
     public String getSkuInfo(@PathVariable("skuId") String skuId, Model model) throws InterruptedException {
         PmsSkuInfo pmsSkuInfo = pmsSkuInfoService.getSkuInfoBySkuId(skuId);
@@ -134,7 +135,6 @@ public class ItemController {
         System.err.println("asd"+valueSkuJson);
 
         model.addAttribute("valueSkuJson",valueSkuJson);
-
         return "item";
     }
     /*
@@ -148,6 +148,16 @@ spring.thymeleaf.mode=LEGACYHTML5  这个什么意思
 没有是返回spuSaleAttrListCheckBySku
      */
 
+
+
+    /*  删除所在行 cy
+    复制cd
+     选中代码块 cw
+      插入自定义模块 cj
+      方法参数显示cp
+     显示方法所在位置cq
+     前往方法所在位置cu
+    */
 
 
 

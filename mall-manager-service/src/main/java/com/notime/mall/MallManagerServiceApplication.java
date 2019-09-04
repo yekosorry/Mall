@@ -12,5 +12,7 @@ public class MallManagerServiceApplication {
         SpringApplication.run(MallManagerServiceApplication.class, args);
     }
 
+
+
 }
 

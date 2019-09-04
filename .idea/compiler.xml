@@ -8,14 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="common-util" />
-        <module name="fastdfs-client-java" />
         <module name="mall-api" />
+        <module name="mall-item-web" />
         <module name="mall-manager-service" />
         <module name="mall-manager-web" />
+        <module name="mall-sekill" />
         <module name="mall-user" />
         <module name="mall-user-service" />
         <module name="mall-user-web" />
-        <module name="maven-archiver" />
         <module name="service-util" />
         <module name="web-util" />
       </profile>
@@ -24,8 +24,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common-util" options="-parameters" />
+      <module name="mall-item-web" options="-parameters" />
       <module name="mall-manager-service" options="-parameters" />
       <module name="mall-manager-web" options="-parameters" />
+      <module name="mall-sekill" options="-parameters" />
       <module name="mall-user" options="-parameters" />
       <module name="mall-user-service" options="-parameters" />
       <module name="mall-user-web" options="-parameters" />
