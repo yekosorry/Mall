@@ -27,6 +27,10 @@ public class MallManagerServiceApplicationTests {
 //        System.err.println(ping);
        // Long test = "OK";
 
+
+
     }
+
+
 
 }

@@ -43,5 +43,14 @@ public class PmsBaseCatalog1 implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "PmsBaseCatalog1{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", catalog2s=" + catalog2s +
+                '}';
+    }
 }
 

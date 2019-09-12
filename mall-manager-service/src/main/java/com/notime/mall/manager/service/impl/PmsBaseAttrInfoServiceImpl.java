@@ -98,5 +98,14 @@ public class PmsBaseAttrInfoServiceImpl implements PmsBaseAttrInfoService {
         return pmsBaseAttrInfo1;
     }
 
+    @Override
+    public List<PmsBaseAttrInfo> getLIstAttrInfoByValueId(String join) {
+            // 通过PMsBaseAttrValue的id  获的attrId  查出 PmsBaseAttrInfo
+        // 两个表关联
+
+
+        return  pmsBaseAttrInfoMapper.selectListAttrInfoByValueId(join);
+    }
+
 
 }

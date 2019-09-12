@@ -48,4 +48,17 @@ public class UmsServiceImpl implements UmsMeMberService {
         UmsMember umsMember1 = umsMeMberMapper.selectOne(umsMember);
         return umsMember1;
     }
+
+    @Override
+    public UmsMember loginByUms(UmsMember umsMember) {
+
+        return  umsMeMberMapper.selectOne(umsMember);
+    }
+
+    @Override
+    public void addUser(UmsMember umsMember) {
+
+          umsMeMberMapper.insertSelective(umsMember);
+
+    }
 }

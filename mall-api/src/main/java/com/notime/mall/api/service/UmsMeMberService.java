@@ -9,4 +9,8 @@ public interface UmsMeMberService {
     List<UmsMember> getAll();
 
     UmsMember getUser(String memberId);
+
+    UmsMember loginByUms(UmsMember umsMember);
+
+    void addUser(UmsMember umsMember);
 }

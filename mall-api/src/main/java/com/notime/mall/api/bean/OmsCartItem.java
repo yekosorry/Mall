@@ -1,5 +1,7 @@
 package com.notime.mall.api.bean;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.io.Serializable;
@@ -8,7 +10,10 @@ import java.util.Date;
 
 public class OmsCartItem implements Serializable{
 
+
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String productId;
     private String productSkuId;
@@ -32,6 +37,35 @@ public class OmsCartItem implements Serializable{
     private String productSn;
     private String productAttr;
     private String isChecked;
+
+    @Override
+    public String toString() {
+        return "OmsCartItem{" +
+                "id='" + id + '\'' +
+                ", productId='" + productId + '\'' +
+                ", productSkuId='" + productSkuId + '\'' +
+                ", memberId='" + memberId + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", sp1='" + sp1 + '\'' +
+                ", sp2='" + sp2 + '\'' +
+                ", sp3='" + sp3 + '\'' +
+                ", productPic='" + productPic + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productSubTitle='" + productSubTitle + '\'' +
+                ", productSkuCode='" + productSkuCode + '\'' +
+                ", memberNickname='" + memberNickname + '\'' +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", deleteStatus=" + deleteStatus +
+                ", productCategoryId='" + productCategoryId + '\'' +
+                ", productBrand='" + productBrand + '\'' +
+                ", productSn='" + productSn + '\'' +
+                ", productAttr='" + productAttr + '\'' +
+                ", isChecked='" + isChecked + '\'' +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 
     @Transient
     private BigDecimal totalPrice;

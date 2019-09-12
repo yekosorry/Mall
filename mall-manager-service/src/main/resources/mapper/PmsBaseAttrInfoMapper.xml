@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.notime.mall.manager.mapper.PmsBaseAttrInfoMapper">
+
+    <resultMap id="selectListAttrInfoByValueIdResultMap" type="com.notime.mall.api.bean.PmsBaseAttrInfo" autoMapping="true">
+            <result column="info_id" property="id" ></result>
+            <collection property="attrValueList" autoMapping="true" ofType="com.notime.mall.api.bean.PmsBaseAttrValue">
+                <result column="value_id" property="id"></result>
+            </collection>
+
+
+    </resultMap>
+    <select id="selectListAttrInfoByValueId"  resultMap="selectListAttrInfoByValueIdResultMap">
+SELECT
+	info.*,
+	info.id info_id,
+	attr_value.*,
+	attr_value.id value_id
+FROM
+	pms_base_attr_info info
+	JOIN pms_base_attr_value attr_value ON attr_value.attr_id = info.id
+WHERE
+	attr_value.id IN (${join})
+    </select>
+</mapper>

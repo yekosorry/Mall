@@ -3,10 +3,7 @@ package com.notime.mall.manager.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.notime.mall.api.bean.PmsSkuAttrValue;
-import com.notime.mall.api.bean.PmsSkuImage;
-import com.notime.mall.api.bean.PmsSkuInfo;
-import com.notime.mall.api.bean.PmsSkuSaleAttrValue;
+import com.notime.mall.api.bean.*;
 import com.notime.mall.api.service.PmsSkuInfoService;
 import com.notime.mall.constanst.RedisConst;
 import com.notime.mall.manager.mapper.PmsSkuAttrValueMapper;
@@ -301,4 +298,60 @@ public class PmsSkuInfoServiceImpl implements PmsSkuInfoService {
 
         return   pmsSkuInfoList;
     }
+
+
+
+    @Override
+    public List<PmsSkuInfo> getAllSkuInfo() {
+
+        List<PmsSkuInfo> pmsSkuInfoList = pmsSkuInfoMapper.selectAll();
+
+        /*
+           @Transient
+    List<PmsSkuSaleAttrValue> skuSaleAttrValueList;
+     @Transient
+    List<PmsSkuImage> skuImageList;
+    @Transient
+    List<PmsSkuAttrValue> skuAttrValueList;
+    @Transient
+    List<PmsSkuSaleAttrValue> skuSaleAttrValueList;
+
+        * */
+
+        for (PmsSkuInfo skuInfo : pmsSkuInfoList) {
+            String skuId = skuInfo.getId();
+
+            PmsSkuImage pmsSkuImage = new PmsSkuImage();
+            pmsSkuImage.setSkuId(skuId);
+            List<PmsSkuImage> pmsSkuImageList = pmsSkuImageMapper.select(pmsSkuImage);
+            skuInfo.setSkuImageList(pmsSkuImageList);
+
+            PmsSkuAttrValue pmsSkuAttrValue = new PmsSkuAttrValue();
+            pmsSkuAttrValue.setSkuId(skuId);
+            List<PmsSkuAttrValue> pmsSkuAttrValueList = pmsSkuAttrValueMapper.select(pmsSkuAttrValue);
+            skuInfo.setSkuAttrValueList(pmsSkuAttrValueList);
+
+            PmsSkuSaleAttrValue pmsSkuSaleAttrValue = new PmsSkuSaleAttrValue();
+            pmsSkuSaleAttrValue.setSkuId(skuId);
+            List<PmsSkuSaleAttrValue> pmsSkuSaleAttrValueList = pmsSkuSaleAttrValueMapper.select(pmsSkuSaleAttrValue);
+            skuInfo.setSkuSaleAttrValueList(pmsSkuSaleAttrValueList);
+
+
+        }
+
+        return pmsSkuInfoList;
+
+    }
+
+    @Override
+    public PmsSkuInfo getSkuInfoById(String productSkuId) {
+
+      //   为什么不行啊PmsSkuInfo pmsSkuInfo = pmsSkuInfoMapper.selectByPrimaryKey(productSkuId);
+        PmsSkuInfo pmsSkuInfo = new PmsSkuInfo();
+        pmsSkuInfo.setId(productSkuId);
+        PmsSkuInfo skuInfo = pmsSkuInfoMapper.selectOne(pmsSkuInfo);
+        return skuInfo;
+    }
+
+
 }

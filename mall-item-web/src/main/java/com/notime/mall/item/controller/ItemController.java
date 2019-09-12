@@ -35,24 +35,24 @@ public class ItemController {
     // 对象取值
 
     @RequestMapping("sdf")
-    public String test(Model model){
-        String  yeko= "火箭头槌";
-    model.addAttribute("hello",yeko);
+    public String test(Model model) {
+        String yeko = "火箭头槌";
+        model.addAttribute("hello", yeko);
 
-    String  flag = "1";
-        model.addAttribute("flag",flag);
+        String flag = "1";
+        model.addAttribute("flag", flag);
         ArrayList<Object> list = new ArrayList<>();
         list.add("1");
         list.add("2");
         list.add("3");
         list.add("4");
-        model.addAttribute("list",list);
-        String  num ="1";
-        model.addAttribute("num",num);
+        model.addAttribute("list", list);
+        String num = "1";
+        model.addAttribute("num", num);
 
         UmsMember umsMember = new UmsMember();
         umsMember.setUsername("千年");
-        model.addAttribute("umsMember",umsMember);
+        model.addAttribute("umsMember", umsMember);
 
 
         return "themeleafTest";
@@ -66,23 +66,24 @@ public class ItemController {
 
     @Reference
     PmsSkuSaleAttrValueService pmsSkuSaleAttrValueService;
-   // 根据skuid  跳转页面详情
+
+
+    // 根据skuid  跳转页面详情
     // skuId 自动提示不是驼峰命名可还行
     @RequestMapping("/{skuId}.html")
     public String getSkuInfo(@PathVariable("skuId") String skuId, Model model) throws InterruptedException {
         PmsSkuInfo pmsSkuInfo = pmsSkuInfoService.getSkuInfoBySkuId(skuId);
         // 前端都是skuInfo 不是自定义的
-        model.addAttribute("skuInfo",pmsSkuInfo);
+        model.addAttribute("skuInfo", pmsSkuInfo);
 
-       // 显示销售属性
+        // 显示销售属性
         String productId = pmsSkuInfo.getProductId();
         // 返回pmsproductAttr 而不是pmsproductAttrValue
         // 因为返回pmsproductAttr中有而不是pmsproductAttrValue的transiant
-        List<PmsProductSaleAttr> pmsProductSaleAttrList = pmsProductInfoService.getSpuSaleAttrListByProductId(productId,skuId);
+        List<PmsProductSaleAttr> pmsProductSaleAttrList = pmsProductInfoService.getSpuSaleAttrListByProductId(productId, skuId);
 //spuSaleAttrListCheckBySku
 
-        model.addAttribute("spuSaleAttrListCheckBySku",pmsProductSaleAttrList);
-
+        model.addAttribute("spuSaleAttrListCheckBySku", pmsProductSaleAttrList);
 
 
         // 实现 点击属性跳转页面
@@ -90,51 +91,50 @@ public class ItemController {
 
         // 返回的是所在的skuInfo  所在的spu 所有的pmsskusaleattrvale
 
-      // List<PmsSkuSaleAttrValue> pmsSkuSaleAttrValueList1 =  pmsSkuSaleAttrValueService.getSkuSaleAttrValueListBySpu(pmsSkuInfo.getProductId());
-
+        // List<PmsSkuSaleAttrValue> pmsSkuSaleAttrValueList1 =  pmsSkuSaleAttrValueService.getSkuSaleAttrValueListBySpu(pmsSkuInfo.getProductId());
 
 
         List<PmsSkuInfo> pmsSkuInfoList = pmsSkuInfoService.getSkuInfoByProductId(pmsSkuInfo.getProductId());
 
-       // 拼接 hsahmapstr   根据key  |attr_value_id|attr_value_id  V skuId
+        // 拼接 hsahmapstr   根据key  |attr_value_id|attr_value_id  V skuId
 
 
-        Map<String ,String> valuesSkuinfo = new HashMap<>();
+        Map<String, String> valuesSkuinfo = new HashMap<>();
 
         // k 和 v 都底是什么
         // k sale attr value id  同个skuod 的所有
         // v skuid
-     //   for (PmsSkuSaleAttrValue pmsSkuSaleAttrValue : pmsSkuSaleAttrValueList1) {
+        //   for (PmsSkuSaleAttrValue pmsSkuSaleAttrValue : pmsSkuSaleAttrValueList1) {
 
-          //  key = key+"|"+pmsSkuSaleAttrValue.getSaleAttrValueId();
-         //   valuesSkuinfo.put(key,pmsSkuSaleAttrValue.getSkuId());
+        //  key = key+"|"+pmsSkuSaleAttrValue.getSaleAttrValueId();
+        //   valuesSkuinfo.put(key,pmsSkuSaleAttrValue.getSkuId());
 //  一个spu
-            // 判断skuId 相等的Key 连接
-            // 为什么不遍历spuId 下有多少个sku  每个sku 下有多少attr value -id 的组合呢
+        // 判断skuId 相等的Key 连接
+        // 为什么不遍历spuId 下有多少个sku  每个sku 下有多少attr value -id 的组合呢
 
-            // 是由两个因素确定一个因素 还是一个因素确定两个因素
-             // 本来一个spu下的每个skuid下的 attr-value-id组合就是不同的
-      //      pmsSkuSaleAttrValue.get
-      //  }
+        // 是由两个因素确定一个因素 还是一个因素确定两个因素
+        // 本来一个spu下的每个skuid下的 attr-value-id组合就是不同的
+        //      pmsSkuSaleAttrValue.get
+        //  }
 
         for (PmsSkuInfo skuInfo : pmsSkuInfoList) {
-        //    System.err.println(skuInfo);
-            String  key ="";
+            //    System.err.println(skuInfo);
+            String key = "";
             List<PmsSkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();
             for (PmsSkuSaleAttrValue pmsSkuSaleAttrValue : skuSaleAttrValueList) {
 
                 String saleAttrValueId = pmsSkuSaleAttrValue.getSaleAttrValueId();
-                key=key+"|"+ saleAttrValueId;
+                key = key + "|" + saleAttrValueId;
             }
 
-            valuesSkuinfo.put(key,skuInfo.getId());
+            valuesSkuinfo.put(key, skuInfo.getId());
         }
 
         System.err.println(valuesSkuinfo);
         String valueSkuJson = JSON.toJSONString(valuesSkuinfo);
-        System.err.println("asd"+valueSkuJson);
+        System.err.println("asd" + valueSkuJson);
 
-        model.addAttribute("valueSkuJson",valueSkuJson);
+        model.addAttribute("valueSkuJson", valueSkuJson);
         return "item";
     }
     /*
@@ -158,11 +158,22 @@ spring.thymeleaf.mode=LEGACYHTML5  这个什么意思
      显示方法所在位置cq
      前往方法所在位置cu
       ctrl 左右  在单词左右
+      版本控制 alt `
+    显示文件目标弹出层 alt + f1
+      shift  滚轮 当前文件左右移动
+      格式整理
+       导入类  ctrl alt   +o
 
-//
+     对代码try catch ctrl alt t
+      所有查找 ctrl shift
+      合并下一行  ctrl shift j
+      大小写切换  CTRL SHIFT U
+      对当前类生成测试类 ctrl shift t
 
+       代码块注释   ctrl shift  /
+      展开关折叠所有代码 ctrl shift +-
 
-
+        自动
 
 */
 

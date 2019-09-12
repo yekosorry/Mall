@@ -10,10 +10,17 @@
  */
 package com.notime.mall.api.bean;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Date;
 
 public class UmsMember  implements Serializable {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String memberLevelId;
     private String username;
@@ -21,7 +28,7 @@ public class UmsMember  implements Serializable {
     private String nickname;
     private String phone;
     private String status;
-    private String createTime;
+    private Date createTime;
     private String icon;
     private String gender;
     private String birthday;
@@ -97,11 +104,11 @@ public class UmsMember  implements Serializable {
         this.status = status;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -217,7 +224,7 @@ public class UmsMember  implements Serializable {
         this.historyIntegration = historyIntegration;
     }
 
-    public UmsMember(String id, String memberLevelId, String username, String password, String nickname, String phone, String status, String createTime, String icon, String gender, String birthday, String city, String job, String personalizedSignature, String sourceUid, String sourceType, String integration, String growth, String luckeyCount, String accessToken, String accessCode, String historyIntegration) {
+    public UmsMember(String id, String memberLevelId, String username, String password, String nickname, String phone, String status, Date createTime, String icon, String gender, String birthday, String city, String job, String personalizedSignature, String sourceUid, String sourceType, String integration, String growth, String luckeyCount, String accessToken, String accessCode, String historyIntegration) {
         this.id = id;
         this.memberLevelId = memberLevelId;
         this.username = username;

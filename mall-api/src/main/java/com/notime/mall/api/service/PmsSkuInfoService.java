@@ -20,4 +20,8 @@ public interface PmsSkuInfoService {
     PmsSkuInfo getSkuInfoBySkuId(String skuId) throws InterruptedException;
 
     List<PmsSkuInfo> getSkuInfoByProductId(String productId);
+
+    List<PmsSkuInfo> getAllSkuInfo();
+
+    PmsSkuInfo getSkuInfoById(String productSkuId);
 }
