@@ -1,17 +1,21 @@
 package com.notime.mall.api.bean;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class OmsOrderItem implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String orderId;
-    private String orderSn;
+    private String orderSn; // 订单号  serial number
     private String productId;
     private String productPic;
     private String productName;
-    private String productBrand;
+    private String productBrand; //  牌子
     private String productSn;
     private BigDecimal productPrice;
     private BigDecimal productQuantity;
@@ -21,10 +25,10 @@ public class OmsOrderItem implements Serializable {
     private String sp1;
     private String sp2;
     private String sp3;
-    private String promotionName;
+    private String promotionName;  // 促销 提升
     private BigDecimal promotionAmount;
-    private BigDecimal couponAmount;
-    private BigDecimal integrationAmount;
+    private BigDecimal couponAmount;  // 折扣卷
+    private BigDecimal integrationAmount;  //全部数量
     private BigDecimal realAmount;
     private int giftIntegration;
     private int giftGrowth;

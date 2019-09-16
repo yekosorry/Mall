@@ -14,4 +14,6 @@ public interface OmsCartItemService {
     List<OmsCartItem> getCartListCookie(String memberId);
 
     OmsCartItem checkCart( String productSkuId, String memberId,String isChecked);
+
+    void deleteList(List<OmsCartItem> cartItemList);
 }

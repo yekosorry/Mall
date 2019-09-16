@@ -16,15 +16,15 @@ public class OmsOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String memberId;
-    private String couponId;
+    private String couponId;  // 优惠
     private String orderSn;
     private Date createTime;
     private String memberUsername;
     private BigDecimal totalAmount;
     private BigDecimal payAmount;
-    private BigDecimal freightAmount;
-    private BigDecimal promotionAmount;
-    private BigDecimal integrationAmount;
+    private BigDecimal freightAmount;   // 运送
+    private BigDecimal promotionAmount;   // 促销
+    private BigDecimal integrationAmount;  //集合
     private BigDecimal couponAmount;
     private BigDecimal discountAmount;
     private int payType;
@@ -33,21 +33,21 @@ public class OmsOrder implements Serializable {
     private int orderType;
     private String deliveryCompany;
     private String deliverySn;
-    private int autoConfirmDay;
+    private int autoConfirmDay; // 确认
     private int integration;
     private int growth;
     private String promotionInfo;
     private int billType;
-    private String billHeader;
+    private String billHeader;  //账单
     private String billContent;
     private String billReceiverPhone;
     private String billReceiverEmail;
-    private String receiverName;
+    private String receiverName; //收到
     private String receiverPhone;
     private String receiverPostCode;
     private String receiverProvince;
     private String receiverCity;
-    private String receiverRegion;
+    private String receiverRegion;  //地区
     private String receiverDetailAddress;
     private String note;
     private int confirmStatus;

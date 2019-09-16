@@ -90,7 +90,7 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         omsCartItem.setMemberId(memberId);
         omsCartItem.setProductSkuId(productSkuId);
         OmsCartItem omsCartItemFormDb = omsCartItemMapper.selectOne(omsCartItem);
-        System.err.println(omsCartItemFormDb);
+       // System.err.println(omsCartItemFormDb);
         //
         omsCartItemFormDb.setIsChecked(isChecked);
          omsCartItemMapper.updateByPrimaryKeySelective(omsCartItemFormDb);
@@ -99,5 +99,26 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         jedis.hset("memberId:"+omsCartItemFormDb.getMemberId(),"cartItemId:"+omsCartItemFormDb.getId(),JSON.toJSONString(omsCartItemFormDb));
         jedis.close();
         return omsCartItemFormDb;
+    }
+
+    @Override
+    public void deleteList(List<OmsCartItem> cartItemList) {
+
+        Jedis jedis = redisUtil.getJedis();
+        System.err.println(cartItemList);
+        for (OmsCartItem cartItem : cartItemList) {
+            //   if (cartItem.getIsChecked()=="1"){  // 不是这样判断的弟弟们
+            if ("1".equals(cartItem.getIsChecked())){
+         // 这样是删除不掉的我透       int delete = omsCartItemMapper.delete(cartItem);  是不是给的条件太多了 这样不是应该更好吗
+                OmsCartItem cartItem1 = new OmsCartItem();
+                cartItem1.setId(cartItem.getId());
+                omsCartItemMapper.delete(cartItem1);
+
+                jedis.hdel("memberId:"+cartItem.getMemberId(),"cartItemId:"+cartItem.getId());
+            }
+        }
+        // redis 删除啊
+
+        jedis.close();
     }
 }

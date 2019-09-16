@@ -1,4 +1,4 @@
-package com.notime.mall.mallorderweb;
+package com.notime.mall.order;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,12 +7,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MallOrderWebApplicationTests {
-
+public class MallOrderServiceApplicationTests {
 
     @Test
     public void contextLoads() {
-
     }
 
 }
