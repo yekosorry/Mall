@@ -63,8 +63,8 @@
     </div>
 
     <form    method="post" id="paymentForm">
-
-         <input type="hidden" name="orderId" th:value="${orderId}" >
+        <input type="hidden" name="totalAmount" th:value="${totalAmount}" >
+        <input type="hidden" name="orderSn" th:value="${orderSn}" >
     </form>
 
 
@@ -77,8 +77,6 @@
               console.log($("#paymentForm").html()) ;
               console.log($("#paymentForm").attr("action")) ;
           })
-
-
       })
 
 

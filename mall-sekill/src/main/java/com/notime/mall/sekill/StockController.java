@@ -1,13 +1,19 @@
 package com.notime.mall.sekill;
 
 import com.notime.mall.redis.RedisUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RLock;
+import org.redisson.api.RSemaphore;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Response;
+import redis.clients.jedis.Transaction;
+
+import java.util.List;
 
 @Controller
 public class StockController {
@@ -104,6 +110,99 @@ public class StockController {
         lock.unlock();
         jedis.close();
         return  i+"";
+
+    }
+
+
+    /*实现 抢购
+    * */
+    // 同个时间内， 只有一个线程能成功
+
+    @ResponseBody
+    @RequestMapping("mi")
+    public  String  xiaomi() {
+        //用watch
+
+        Jedis jedis = redisUtil.getJedis();
+
+
+        String watch = jedis.watch("Key");
+        String stock = jedis.get("stock");
+        Transaction multi = jedis.multi();
+        int i = Integer.parseInt(stock);
+        if (i > 0) {
+//            i--;
+//          锁不住的
+//
+//            multi.set("stock", "" + i);
+            Response<Long> stock1 = multi.incrBy("stock", -1);
+            List<Object> exec = multi.exec();
+            if (exec != null && exec.size() > 0) {
+                System.err.println("剩下=" + exec.get(0));
+
+
+            } else {
+                System.err.println("抢购失败"+ exec.get(0));
+
+            }
+
+
+        }else{
+            System.err.println("抢购失败");
+
+        }
+        jedis.close();
+        return stock;
+    }
+
+    // 坑  要用incryby 才能锁住
+
+
+
+
+    // 先到先得
+    // 先到先得
+    @ResponseBody
+    @RequestMapping("two")
+    public void  two(){
+        RSemaphore semaphore = redissonClient.getSemaphore("stock");
+        boolean b = semaphore.tryAcquire();
+
+        if (b){
+            System.err.println(Thread.currentThread().getName()+"抢购成功");
+        }else {
+            System.err.println(Thread.currentThread().getName()+"抢购失败");
+
+        }
+
+
+
+
+    }
+
+    // 先到先得
+    @ResponseBody
+    @RequestMapping("three")
+    public void  two(String userId){
+
+
+
+
+        //  限制抢购数量  一个账号只能抢一次  用setnx 不ok 不让抢
+        Jedis jedis = redisUtil.getJedis();
+        Long setnx = jedis.setnx(userId, "123");
+        String setex = jedis.setex(userId,  60 * 30, "123");
+        if (StringUtils.isNotBlank(setex)&&setex.equals("OK")){
+            RSemaphore semaphore = redissonClient.getSemaphore("stock");
+            boolean b = semaphore.tryAcquire();
+
+            if (b){
+                System.err.println(Thread.currentThread().getName()+"抢购成功");
+            }else {
+                System.err.println(Thread.currentThread().getName()+"抢购失败");
+
+            }
+        }
 
     }
 }

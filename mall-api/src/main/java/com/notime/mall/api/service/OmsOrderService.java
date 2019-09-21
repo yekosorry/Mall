@@ -8,4 +8,8 @@ public interface OmsOrderService {
     boolean checkTradeCode(String memberId, String tradeCod);
 
     String generateTradeCode(String memberId);
+
+    void updateOrder(OmsOrder omsOrder);
+
+    void sendWare(OmsOrder omsOrder);
 }

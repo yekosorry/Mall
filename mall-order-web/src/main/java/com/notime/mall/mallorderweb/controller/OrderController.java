@@ -8,6 +8,7 @@ import com.notime.mall.api.bean.OmsOrder;
 import com.notime.mall.api.bean.OmsOrderItem;
 import com.notime.mall.api.bean.UmsMemberReceiveAddress;
 import com.notime.mall.api.service.OmsCartItemService;
+import com.notime.mall.api.service.OmsOrderItemService;
 import com.notime.mall.api.service.OmsOrderService;
 import com.notime.mall.api.service.UmsMemberReceiveAddressService;
 import org.springframework.beans.BeanUtils;
@@ -118,6 +119,8 @@ public class OrderController {
     @Reference
     OmsOrderService omsOrderService;
 
+    @Reference
+    OmsOrderItemService omsOrderItemService;
 
 
     @RequestMapping("submitOrder")
@@ -166,7 +169,7 @@ public class OrderController {
 
      //  存入数据库
         omsOrderService.addOmsorder(omsOrder);
-
+        omsOrderItemService.addOrderItemList(omsOrderItems,omsOrder.getId());
         // 购物车清除  db redis
         omsCartItemService.deleteList(cartItemList);
 
