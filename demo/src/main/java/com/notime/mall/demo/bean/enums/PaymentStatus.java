@@ -1,10 +1,9 @@
 package com.notime.mall.demo.bean.enums;
 
-/**
- * @param
- * @return
- */
+
 public enum PaymentStatus {
+
+
 
     UNPAID("支付中"),
     PAID("已支付"),

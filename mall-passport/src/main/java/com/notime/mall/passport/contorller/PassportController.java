@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,13 +69,17 @@ public class PassportController {
         map.put("redirect_uri","http://yeko.mall.com:8086/vlogin");
         map.put("code",code);
         String accessJson = HttpclientUtil.doPost(addr3, map);
-
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.add(1);
             /*{
     "access_token": "2.00zWvsRC0rma_11b22e8f33204Psw_",
     "remind_in": "157679999",
     "expires_in": 157679999,
     "uid": "2096554241",
     "isRealName": "true"
+
+
 }
         * */
         String access_token = null;
