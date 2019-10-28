@@ -63,7 +63,13 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
 
         Jedis jedis = redisUtil.getJedis();
         jedis.hset("memberId:"+omsCartItemForDb.getMemberId(),"cartItemId:"+omsCartItemForDb.getId(),JSON.toJSONString(omsCartItemForDb));
+
         jedis.close();
+
+
+
+
+
     }
 
     @Override
@@ -76,7 +82,12 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
            // JSON.parseArray(hvals,OmsCartItem.class)
             for (String hval : hvals) {
                 OmsCartItem cartItem = JSON.parseObject(hval, OmsCartItem.class);
+
+
                 omsCartItemList.add(cartItem);
+
+
+
             }
         }
         jedis.close();
@@ -91,7 +102,6 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         omsCartItem.setProductSkuId(productSkuId);
         OmsCartItem omsCartItemFormDb = omsCartItemMapper.selectOne(omsCartItem);
        // System.err.println(omsCartItemFormDb);
-        //
         omsCartItemFormDb.setIsChecked(isChecked);
          omsCartItemMapper.updateByPrimaryKeySelective(omsCartItemFormDb);
         //redis
@@ -113,12 +123,10 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
                 OmsCartItem cartItem1 = new OmsCartItem();
                 cartItem1.setId(cartItem.getId());
                 omsCartItemMapper.delete(cartItem1);
-
                 jedis.hdel("memberId:"+cartItem.getMemberId(),"cartItemId:"+cartItem.getId());
             }
         }
         // redis 删除啊
-
         jedis.close();
     }
 }
