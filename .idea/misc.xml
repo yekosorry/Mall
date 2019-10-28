@@ -16,6 +16,16 @@
         <option value="$PROJECT_DIR$/mall-manager-service/pom.xml" />
         <option value="$PROJECT_DIR$/mall-item-web/pom.xml" />
         <option value="$PROJECT_DIR$/mall-sekill/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-pay/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-order-web/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-order-service/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-search-web/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-search-service/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-passport/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-cart-web/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-cart-service/pom.xml" />
+        <option value="$PROJECT_DIR$/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/gware-manage/pom.xml" />
       </list>
     </option>
   </component>
