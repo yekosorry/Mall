@@ -35,6 +35,8 @@ public class PmsSearchSkuInfoServiceImpl implements PmsSearchSkuInfoService {
         //dsl
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.size(200);
+        searchSourceBuilder.from(0);
+
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
 
         if (StringUtil.isNotBlank(catalog3Id)){
@@ -44,7 +46,8 @@ public class PmsSearchSkuInfoServiceImpl implements PmsSearchSkuInfoService {
 
 
         if (StringUtil.isNotBlank(keyword)){
-            MatchQueryBuilder keyword1 = new MatchQueryBuilder("keyword", keyword);
+          //  MatchQueryBuilder keyword1 = new MatchQueryBuilder("keyword", keyword);
+            MatchQueryBuilder keyword1 = new MatchQueryBuilder("skuName", keyword);
             boolQueryBuilder.must(keyword1);
         }
 
@@ -58,6 +61,8 @@ public class PmsSearchSkuInfoServiceImpl implements PmsSearchSkuInfoService {
         searchSourceBuilder.query(boolQueryBuilder);
 
         String dsl = searchSourceBuilder.toString();
+
+        System.err.println(dsl);
 
         Search search = new Search.Builder(dsl).addIndex("searchmapping").addType("searchSkuInfo").build();
         List<PmsSearchSkuInfo> pmsSearchSkuInfoList = new ArrayList<>();        try {

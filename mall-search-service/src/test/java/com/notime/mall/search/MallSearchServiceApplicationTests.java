@@ -35,7 +35,17 @@ public class MallSearchServiceApplicationTests {
     JestClient jestClient;
     @Reference
     PmsSkuInfoService pmsSkuInfoService;
+
     @Test
+    public void contextLoads1() throws IOException {
+
+        jestClient.execute(null);
+    }
+
+
+
+
+        @Test
     public void contextLoads() throws IOException {
 
         // searchmapping/searchSkuInfo/_search
